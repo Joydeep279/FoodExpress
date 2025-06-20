@@ -1,0 +1,30 @@
+{
+  "name": "foodexpress",
+  "version": "1.0.0",
+  "description": "namasteReact app",
+  
+  "scripts": {
+    "test": "jest",
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Joydeep279/FoodExpress.git"
+  },
+  "keywords": [
+    "namaste",
+    "react"
+  ],
+  "author": "Joydeep@279",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Joydeep279/FoodExpress/issues"
+  },
+  "homepage": "https://github.com/Joydeep279/FoodExpress#readme",
+  "dependencies": {
+    "parcel": "^2.15.2",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  }
+}

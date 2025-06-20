@@ -1,7 +1,7 @@
 import { logoCDN } from "../utils/CDN_Links";
 
+console.log("Header Called");
 const Header = () => {
-  
   return (
     <div className="header-container">
       <div className="logo-container">

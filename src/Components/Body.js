@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import imgCDN from "../utils/CDN_Links";
-import ResList from "../utils/mockData";
+import Shimmer from "./Shimmer";
 
 const CardLayout = (props) => {
-  useEffect(() => {});
   const { cuisines, avgRating, cloudinaryImageId, areaName, name, sla } =
     props.resInfo.info;
   const { slaString } = sla;
@@ -23,30 +22,44 @@ const CardLayout = (props) => {
 };
 
 const MainBody = () => {
-  const [mainList, setMainList] = useState(ResList);
+  const [mainList, setMainList] = useState([]);
   useEffect(() => {
-    console.log("UseEffect Called!");
+    getApiData();
   }, []);
-  
-  return (
-    <div className="Main-Body">
-      <div className="Search_Container">
-        <input type="text" placeholder="restrurent name"></input>
-        <button>Search</button>
-        <button
-          onClick={() => {
-            const List = ResList.filter((item) => item.info.avgRating > 4.5);
-            setMainList(List);
-          }}>
-          Top Rated Restrurant
-        </button>
+  async function getApiData() {
+    const apiData = await fetch(
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=24.8332708&lng=92.7789054&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+    );
+    const data = await apiData.json();
+    setMainList(
+      data?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
+  }
+  if (mainList.length === 0) {
+    return <div className="card-container">
+      <Shimmer/>
+      </div>;
+  } else {
+    return (
+      <div className="Main-Body">
+        <div className="Search_Container">
+          <input type="text" placeholder="restrurent name"></input>
+          <button>Search</button>
+          <button
+            onClick={() => {
+              const List = ResList.filter((item) => item.info.avgRating > 4.5);
+              setMainList(List);
+            }}>
+            Top Rated Restrurant
+          </button>
+        </div>
+        <div className="card-container">
+          {mainList.map((res) => (
+            <CardLayout resInfo={res} key={res.info.id} />
+          ))}
+        </div>
       </div>
-      <div className="card-container">
-        {mainList.map((res) => (
-          <CardLayout resInfo={res} key={res.info.id} />
-        ))}
-      </div>
-    </div>
-  );
+    );
+  }
 };
 export default MainBody;

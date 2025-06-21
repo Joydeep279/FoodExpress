@@ -1,4 +1,5 @@
 import React from "react";
+console.log("Shimmer Loaded");
 
 const ShimmerLayout = () => {
   return (

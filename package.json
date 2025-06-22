@@ -2,7 +2,6 @@
   "name": "foodexpress",
   "version": "1.0.0",
   "description": "namasteReact app",
-  
   "scripts": {
     "test": "jest",
     "start": "parcel index.html",
@@ -25,6 +24,7 @@
   "dependencies": {
     "parcel": "^2.15.2",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "react-router-dom": "^7.6.2"
   }
 }

@@ -1,11 +1,9 @@
 import { useState } from "react";
 import { logoCDN } from "../utils/CDN_Links";
-
+import { Link } from "react-router";
 console.log("Header Called");
 const Header = () => {
   const [BtnText, setBtnText] = useState("LogIn");
-  console.log("Component Called!");
-
   return (
     <div className="header-container">
       <div className="logo-container">
@@ -13,10 +11,18 @@ const Header = () => {
       </div>
       <div className="header-item-container">
         <ul>
-          <li>Home</li>
-          <li>About Us</li>
-          <li>Contact Us</li>
-          <li>Cart</li>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/about">About Us</Link>
+          </li>
+          <li>
+            <Link to="/contact">Contact Us</Link>
+          </li>
+          <li>
+            <Link to="/cart">Cart</Link>
+          </li>
           <li>
             <button
               className="HeaderBTN"

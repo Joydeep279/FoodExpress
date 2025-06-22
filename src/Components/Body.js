@@ -57,7 +57,7 @@ const MainBody = () => {
         <div className="Search_Container">
           <input
             type="text"
-            placeholder="restrurent name"
+            placeholder="restrurant name"
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}></input>
           <button

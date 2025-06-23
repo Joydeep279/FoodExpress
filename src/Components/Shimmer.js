@@ -13,7 +13,7 @@ const ShimmerLayout = () => {
 };
 const Shimmer = () => {
   return (
-    <React.Fragment>
+    <div className="Shimmer">
       <ShimmerLayout />
       <ShimmerLayout />
       <ShimmerLayout />
@@ -23,7 +23,7 @@ const Shimmer = () => {
       <ShimmerLayout />
       <ShimmerLayout />
       <ShimmerLayout />
-    </React.Fragment>
+    </div>
   );
 };
 export default Shimmer;

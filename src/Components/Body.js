@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import imgCDN from "../utils/CDN_Links";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router";
 
 const CardLayout = (props) => {
-  const { cuisines, avgRating, cloudinaryImageId, areaName, name, sla } =
+  const { cuisines, avgRating, cloudinaryImageId, areaName, name, sla, id } =
     props.resInfo.info;
   const { slaString } = sla;
   return (
-    <div className="card-layout">
+    <Link className="card-layout" to={"/restrurant/" + id}>
       <img src={imgCDN + cloudinaryImageId} alt="card-logo" />
       <div className="Card-text-area">
         <h3>{name}</h3>
@@ -17,7 +18,7 @@ const CardLayout = (props) => {
         <span style={{ color: "gray" }}>{cuisines.join(", ")}</span>
         <span style={{ color: "gray" }}>{areaName}</span>
       </div>
-    </div>
+    </Link>
   );
 };
 
@@ -37,6 +38,8 @@ const MainBody = () => {
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.7040592&lng=77.10249019999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const data = await apiData.json();
+    console.log(data?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    
     setMainList(
       data?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );

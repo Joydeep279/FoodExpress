@@ -98,12 +98,28 @@ button:hover {
 .Search_Container input {
   border-radius: 0.5rem;
 }
-.header-item-container>ul{
+.header-item-container > ul {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-a{
+a {
   list-style-type: none;
-
+  text-decoration: none;
+  color: #26272a;
+}
+.MenuContainer {
+  display: flex;
+  max-width: 90%;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+.MenuContainer > div {
+  max-width: 350px;
+  overflow: hidden;
+}
+.Shimmer {
+  display: flex;
+  flex-wrap: wrap;
 }

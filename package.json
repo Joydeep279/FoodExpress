@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/Joydeep279/FoodExpress#readme",
   "dependencies": {
+    "formik": "^2.4.6",
     "parcel": "^2.15.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",

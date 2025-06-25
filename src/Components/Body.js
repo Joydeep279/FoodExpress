@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import imgCDN from "../utils/CDN_Links";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router";
+import useAllRestrurant from "../utils/useAllRestrurant";
+import isOnline from "../utils/isOnline";
 
 const CardLayout = (props) => {
   const { cuisines, avgRating, cloudinaryImageId, areaName, name, sla, id } =
@@ -23,33 +25,11 @@ const CardLayout = (props) => {
 };
 
 const MainBody = () => {
-  const [mainList, setMainList] = useState([]);
-  const [filterList, setFilterList] = useState([]);
   const [searchText, setSearchText] = useState("");
-  useEffect(() => {
-    getApiData();
-  }, []);
+
   console.log("MainBODY Rendered");
-
-  async function getApiData() {
-    console.log("Api Called");
-
-    const apiData = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.7040592&lng=77.10249019999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    );
-    const data = await apiData.json();
-    console.log(
-      data?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
-
-    setMainList(
-      data?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
-    setFilterList(
-      data?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
-  }
-
+  const [mainList, setMainList, filterList, setFilterList] = useAllRestrurant();
+  if (!isOnline()) return <h1>Looks like you are offline</h1>;
   if (filterList.length === 0) {
     return (
       <div className="card-container">

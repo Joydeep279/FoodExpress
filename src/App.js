@@ -6,6 +6,7 @@ import About from "./Components/About";
 import Contact from "./Components/Contact";
 import Error from "./Components/Error";
 import Menu from "./Components/Menu";
+
 console.log("App.js Called");
 
 const AppLayout = () => {

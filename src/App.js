@@ -6,8 +6,13 @@ import About from "./Components/About";
 import Contact from "./Components/Contact";
 import Error from "./Components/Error";
 import Menu from "./Components/Menu";
+import { lazy } from "react";
+import { Suspense } from "react";
+import Shimmer from "./Components/Shimmer";
 
 console.log("App.js Called");
+const Cart = lazy(() => import("./Components/Cart"));
+console.log(Cart);
 
 const AppLayout = () => {
   return (
@@ -36,11 +41,21 @@ const appRoute = createBrowserRouter([
         element: <Contact />,
       },
       {
-        path:"/restrurant/:resId",
-        element:<Menu/>
-      }
+        path: "/restrurant/:resId",
+        element: <Menu />,
+      },
+      {
+        path: "/cart",
+
+        element: (
+          <Suspense fallback={<Shimmer />}>
+            <Cart />
+          </Suspense>
+        ),
+      },
     ],
   },
 ]);
+
 const rootElement = ReactDOM.createRoot(document.getElementById("root"));
 rootElement.render(<RouterProvider router={appRoute} />);

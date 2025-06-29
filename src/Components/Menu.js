@@ -1,12 +1,13 @@
+import React from "react";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router";
 import useRestrurantMenu from "../utils/useRestrurantMenu";
 const MenuLayout = (props) => {
   const { name, category, ratings, imageId } = props.data.card.info;
-
   return (
-    <div>
+    <React.Fragment>
       <img
+        className="w-64 h-64"
         src={
           "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/" +
           imageId
@@ -18,7 +19,7 @@ const MenuLayout = (props) => {
         {ratings.aggregatedRating.rating}{" "}
         {ratings.aggregatedRating.ratingCountV2}
       </span>
-    </div>
+    </React.Fragment>
   );
 };
 
@@ -34,9 +35,11 @@ const Menu = () => {
     console.log(mainMenu);
 
     return (
-      <div className="MenuContainer">
+      <div className="flex flex-wrap gap-2 w-full justify-center">
         {mainMenu.map((items) => (
-          <div key={items.card.info.id}>
+          <div
+            key={items.card.info.id}
+            className="flex flex-col min-w-60 text-ellipsis">
             <MenuLayout data={items} />
           </div>
         ))}

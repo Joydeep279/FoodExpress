@@ -1,41 +1,14 @@
 import { useState } from "react";
-import imgCDN from "../utils/CDN_Links";
 import Shimmer from "./Shimmer";
-import { Link } from "react-router";
 import useAllRestrurant from "../utils/useAllRestrurant";
 import isOnline from "../utils/isOnline";
-
-const CardLayout = (props) => {
-  const { cuisines, avgRating, cloudinaryImageId, areaName, name, sla, id } =
-    props.resInfo.info;
-  const { slaString } = sla;
-  return (
-    <Link
-      className="flex flex-col w-64 h-80 text-ellipsis rounded-lg overflow-hidden transition-all hover:shadow-md bg-[#faf9f9] object-fill"
-      to={"/restrurant/" + id}>
-      <img
-        src={imgCDN + cloudinaryImageId}
-        alt="card-logo"
-        className="w-full h-1/2"
-      />
-      <div className="flex flex-col px-2">
-        <h3>{name}</h3>
-        <span style={{ fontWeight: "bolder" }}>
-          {avgRating}⭐{" • " + slaString}
-        </span>
-        <span style={{ color: "gray" }}>{cuisines.join(", ")}</span>
-        <span style={{ color: "gray" }}>{areaName}</span>
-      </div>
-    </Link>
-  );
-};
-
+import CardLayout, { PromotedCardLayout } from "./CardLayout";
 const MainBody = () => {
   const [searchText, setSearchText] = useState("");
-
+  const PromotedCard = PromotedCardLayout();
   console.log("MainBODY Rendered");
   const [mainList, setMainList, filterList, setFilterList] = useAllRestrurant();
-  if (!isOnline()) return <h1>Looks like you are offline</h1>;
+  if (!isOnline()) return <h1>{}Looks like you are offline</h1>;
   if (filterList.length === 0) {
     return (
       <div className="flex justify-center items-center">
@@ -72,9 +45,13 @@ const MainBody = () => {
           </button>
         </div>
         <div className="flex flex-wrap gap-10 justify-center items-center mx-auto max-w-[80%]">
-          {filterList.map((res) => (
-            <CardLayout resInfo={res} key={res.info.id} />
-          ))}
+          {filterList.map((res) =>
+            res.info.avgRating > 4.2 ? (
+              <PromotedCard resInfo={res} key={res.info.id} />
+            ) : (
+              <CardLayout resInfo={res} key={res.info.id} />
+            )
+          )}
         </div>
       </div>
     );

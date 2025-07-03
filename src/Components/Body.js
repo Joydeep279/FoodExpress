@@ -26,7 +26,7 @@ const MainBody = () => {
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}></input>
           <button
-            className="bg-gray-950 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded-md"
+            className="bg-gray-950 hover:bg-gray-900 text-white font-bold py-0.5 px-1 rounded-md"
             onClick={() => {
               const filterData = mainList.filter((item) =>
                 item?.info.name.toLowerCase().includes(searchText.toLowerCase())
@@ -36,7 +36,7 @@ const MainBody = () => {
             Search
           </button>
           <button
-            className="bg-gray-950 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded-md"
+            className="bg-gray-950 hover:bg-gray-900 text-white font-bold py-0.5 px-1 rounded-md"
             onClick={() => {
               const List = mainList.filter((item) => item.info.avgRating > 4.1);
               setFilterList(List);
@@ -46,10 +46,14 @@ const MainBody = () => {
         </div>
         <div className="flex flex-wrap gap-10 justify-center items-center mx-auto max-w-[80%]">
           {filterList.map((res) =>
-            res.info.avgRating > 4.2 ? (
-              <PromotedCard resInfo={res} key={res.info.id} />
+            res.info.avgRating > 4.5 ? (
+              <div key={res.info.id}>
+                <PromotedCard resInfo={res} />
+              </div>
             ) : (
-              <CardLayout resInfo={res} key={res.info.id} />
+              <div key={res.info.id}>
+                <CardLayout resInfo={res} />
+              </div>
             )
           )}
         </div>

@@ -6,14 +6,14 @@ console.log("Header Called");
 const Header = () => {
   const [BtnText, setBtnText] = useState("LogIn");
   return (
-    <div className="flex justify-between items-center">
-      <div className="max-w-48 max-h-40">
+    <div className="flex justify-between items-start pt-2.5">
+      <div className="max-w-44 max-h-36">
         <Link to={"/"}>
-        <img src={logoCDN} alt="logo-icon" />
+          <img className="w-40 h-32" src={logoCDN} alt="logo-icon" />
         </Link>
       </div>
       <div>
-        <ul className="header-list flex justify-start items-start w-lg gap-4 text-xl antialiased font-medium text-[#353535] hover:text-black transition-all">
+        <ul className="header-list flex justify-center items-center w-lg gap-4 text-xl antialiased font-medium text-[#353535] hover:text-black transition-all">
           <li>
             {isOnline() ? (
               <img

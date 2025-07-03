@@ -1,50 +1,38 @@
-import React from "react";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router";
 import useRestrurantMenu from "../utils/useRestrurantMenu";
-const MenuLayout = (props) => {
-  const { name, category, ratings, imageId } = props.data.card.info;
-  return (
-    <React.Fragment>
-      <img
-        className="w-64 h-64"
-        src={
-          "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/" +
-          imageId
-        }
-      />
-      <h2>{name}</h2>
-      <span>{category}</span>
-      <span>
-        {ratings.aggregatedRating.rating}{" "}
-        {ratings.aggregatedRating.ratingCountV2}
-      </span>
-    </React.Fragment>
-  );
-};
+import ItemList from "./ItemList";
+import { useState } from "react";
 
 const Menu = () => {
+  const [openIndex, setOpenIndex] = useState(-1);
   const { resId } = useParams();
   console.log(resId);
 
   const mainMenu = useRestrurantMenu(resId);
+  if (mainMenu === null) return <Shimmer />;
+  console.log(mainMenu);
 
-  if (mainMenu === null) {
-    return <Shimmer />;
-  } else {
-    console.log(mainMenu);
+  const category = mainMenu.filter(
+    (item) =>
+      item?.card?.card?.["@type"] ===
+      "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+  );
 
-    return (
-      <div className="flex flex-wrap gap-2 w-full justify-center">
-        {mainMenu.map((items) => (
-          <div
-            key={items.card.info.id}
-            className="flex flex-col min-w-60 text-ellipsis">
-            <MenuLayout data={items} />
-          </div>
-        ))}
-      </div>
-    );
-  }
+  console.log(category);
+
+  return (
+    <div className="w-1/2 m-auto flex flex-col gap-2.5">
+      {category.map((items, index) => (
+        <ItemList
+          items={items}
+          key={items?.card?.card?.categoryId}
+          openIndex={index === openIndex}
+          fnxSetOpenIndex={() => setOpenIndex(index)}
+          fnxCloseOpenIndex={() => setOpenIndex(-1)}
+        />
+      ))}
+    </div>
+  );
 };
 export default Menu;

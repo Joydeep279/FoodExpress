@@ -8,17 +8,8 @@ const useRestrurantMenu = (resId) => {
         resId
     );
     const menuData = await apiData.json();
-    for (let i = 0; i < 7; i++) {
-      if (
-        menuData?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[i]
-          .card.card.itemCards !== undefined
-      ) {
-        setMainMenu(
-          menuData?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[i]
-            .card.card.itemCards
-        );
-      }
-    }
+    console.log(menuData.data.cards[4].groupedCard.cardGroupMap.REGULAR.cards);
+    setMainMenu(menuData.data.cards[4].groupedCard.cardGroupMap.REGULAR.cards)
   }
   useEffect(() => {
     fetchMenuData();

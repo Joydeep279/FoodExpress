@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Shimmer from "./Shimmer";
 import useAllRestrurant from "../utils/useAllRestrurant";
 import isOnline from "../utils/isOnline";
 import CardLayout, { PromotedCardLayout } from "./CardLayout";
+import userInfo from "../utils/UserContext";
 const MainBody = () => {
+  const { name, setUserName } = useContext(userInfo);
   const [searchText, setSearchText] = useState("");
   const PromotedCard = PromotedCardLayout();
   console.log("MainBODY Rendered");
@@ -18,7 +20,7 @@ const MainBody = () => {
   } else {
     return (
       <div className="flex flex-col gap-10">
-        <div className="flex gap-10 px-10">
+        <div className="flex gap-10 px-10 justify-start items-center">
           <input
             className="bg-[#e5e5e5] rounded-xl p-2.5"
             type="text"
@@ -43,6 +45,8 @@ const MainBody = () => {
             }}>
             Top Rated Restrurant
           </button>
+          <span>{name}</span>
+          <input value={name} onChange={(e) => setUserName(e.target.value)} />
         </div>
         <div className="flex flex-wrap gap-10 justify-center items-center mx-auto max-w-[80%]">
           {filterList.map((res) =>

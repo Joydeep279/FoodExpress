@@ -2,8 +2,11 @@ import { useState } from "react";
 import { logoCDN } from "../utils/CDN_Links";
 import { Link } from "react-router";
 import isOnline from "../utils/isOnline";
+import userInfo from "../utils/UserContext";
+import { useContext } from "react";
 console.log("Header Called");
 const Header = () => {
+  const { name } = useContext(userInfo);
   const [BtnText, setBtnText] = useState("LogIn");
   return (
     <div className="flex justify-between items-start pt-2.5">
@@ -13,7 +16,7 @@ const Header = () => {
         </Link>
       </div>
       <div>
-        <ul className="header-list flex justify-center items-center w-lg gap-4 text-xl antialiased font-medium text-[#353535] hover:text-black transition-all">
+        <ul className="header-list flex justify-center items-center gap-4 text-xl antialiased font-medium text-[#353535] hover:text-black transition-all">
           <li>
             {isOnline() ? (
               <img
@@ -50,6 +53,7 @@ const Header = () => {
               {BtnText}
             </button>
           </li>
+          <li>{name}</li>
         </ul>
       </div>
     </div>

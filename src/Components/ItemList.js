@@ -2,12 +2,12 @@ import MenuListLayout from "./MenuLayout";
 
 const ItemList = ({ items, openIndex, fnxSetOpenIndex, fnxCloseOpenIndex }) => {
   return (
-    <div
-      className="shadow-md cursor-pointer"
-      onClick={() => {
-        openIndex ? fnxCloseOpenIndex() : fnxSetOpenIndex();
-      }}>
-      <div className="flex justify-between items-stretch min-w-60 min-h-10">
+    <div className="shadow-md cursor-pointer">
+      <div
+        className="flex justify-between items-stretch min-w-60 min-h-10"
+        onClick={() => {
+          openIndex ? fnxCloseOpenIndex() : fnxSetOpenIndex();
+        }}>
         <div className="font-medium text-2xl">
           {items.card.card.title}({items?.card?.card?.itemCards?.length})
         </div>

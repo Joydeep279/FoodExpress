@@ -9,7 +9,7 @@ const MainBody = () => {
   const [searchText, setSearchText] = useState("");
   const PromotedCard = PromotedCardLayout();
   console.log("MainBODY Rendered");
-  const [mainList, setMainList, filterList, setFilterList] = useAllRestrurant();
+  const [mainList, , filterList, setFilterList] = useAllRestrurant();
   if (!isOnline()) return <h1>{}Looks like you are offline</h1>;
   if (filterList.length === 0) {
     return (
@@ -40,7 +40,7 @@ const MainBody = () => {
           <button
             className="bg-gray-950 hover:bg-gray-900 text-white font-bold py-0.5 px-1 rounded-md"
             onClick={() => {
-              const List = mainList.filter((item) => item.info.avgRating > 4.1);
+              const List = mainList.filter((item) => item.info.avgRating > 4.5);
               setFilterList(List);
             }}>
             Top Rated Restrurant

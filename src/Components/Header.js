@@ -4,10 +4,14 @@ import { Link } from "react-router";
 import isOnline from "../utils/isOnline";
 import userInfo from "../utils/UserContext";
 import { useContext } from "react";
+import { useSelector } from "react-redux";
 console.log("Header Called");
 const Header = () => {
   const { name } = useContext(userInfo);
   const [BtnText, setBtnText] = useState("LogIn");
+  const cartItems = useSelector((store) => store.cart.cartItem);
+  console.log(cartItems);
+
   return (
     <div className="flex justify-between items-start pt-2.5">
       <div className="max-w-44 max-h-36">
@@ -40,7 +44,13 @@ const Header = () => {
             <Link to="/contact">Contact Us</Link>
           </li>
           <li>
-            <Link to="/cart">Cart</Link>
+            <Link to="/cart">
+              <span className="relative pl-5 text-center">{cartItems.length}</span>
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png"
+                className="w-10 h-8"
+              />
+            </Link>
           </li>
           <li>
             <button

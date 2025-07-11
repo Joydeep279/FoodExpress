@@ -15,7 +15,7 @@ const ItemList = ({ items, openIndex, fnxSetOpenIndex, fnxCloseOpenIndex }) => {
       </div>
       <div className="flex flex-col gap-5">
         {openIndex ? (
-          <MenuListLayout data={items?.card?.card?.itemCards} />
+          <MenuListLayout data={items?.card?.card?.itemCards} isCartComponent={false} />
         ) : null}
       </div>
     </div>

@@ -9,8 +9,9 @@ import Menu from "./Components/Menu";
 import { lazy, useEffect, useState } from "react";
 import { Suspense } from "react";
 import Shimmer from "./Components/Shimmer";
-import { useContext } from "react";
 import userInfo from "./utils/UserContext";
+import appStore from "./utils/Store";
+import { Provider } from "react-redux";
 console.log("App.js Called");
 const Cart = lazy(() => import("./Components/Cart"));
 console.log(Cart);
@@ -20,16 +21,19 @@ const AppLayout = () => {
   useEffect(() => {
     //API call
     setUserName("");
-  },[]);
+  }, []);
   return (
-    <userInfo.Provider value={{ name: userName, setUserName }}>
-      <div className="main-layout">
-        <Header />
-        <Outlet />
-      </div>
-    </userInfo.Provider>
+    <Provider store={appStore}>
+      <userInfo.Provider value={{ name: userName, setUserName }}>
+        <div className="main-layout">
+          <Header />
+          <Outlet />
+        </div>
+      </userInfo.Provider>
+    </Provider>
   );
 };
+console.log(AppLayout);
 const appRoute = createBrowserRouter([
   {
     path: "/",
@@ -64,6 +68,7 @@ const appRoute = createBrowserRouter([
     ],
   },
 ]);
+console.log(appRoute);
 
 const rootElement = ReactDOM.createRoot(document.getElementById("root"));
 rootElement.render(<RouterProvider router={appRoute} />);

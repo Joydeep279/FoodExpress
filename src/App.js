@@ -23,14 +23,16 @@ const AppLayout = () => {
     setUserName("");
   }, []);
   return (
-    <Provider store={appStore}>
-      <userInfo.Provider value={{ name: userName, setUserName }}>
-        <div className="main-layout">
-          <Header />
-          <Outlet />
-        </div>
-      </userInfo.Provider>
-    </Provider>
+    <div data={"globalValue"}>
+      <Provider store={appStore}>
+        <userInfo.Provider value={{ name: userName, setUserName }}>
+          <div className="main-layout">
+            <Header />
+            <Outlet />
+          </div>
+        </userInfo.Provider>
+      </Provider>
+    </div>
   );
 };
 console.log(AppLayout);

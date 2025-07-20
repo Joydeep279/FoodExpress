@@ -6,7 +6,8 @@ import userInfo from "../utils/UserContext";
 import { useContext } from "react";
 import { useSelector } from "react-redux";
 console.log("Header Called");
-const Header = () => {
+const Header = (props) => {
+
   const { name } = useContext(userInfo);
   const [BtnText, setBtnText] = useState("LogIn");
   const cartItems = useSelector((store) => store.cart.cartItem);
@@ -24,7 +25,7 @@ const Header = () => {
           <li>
             {isOnline() ? (
               <img
-                className="w-10 h-10"
+                className="w-10 h- bg-blend-normal"
                 src="https://static.wixstatic.com/media/4ea17e_a962cd2cf30b4c01a8d76b9629b42148~mv2.gif"
                 alt="Online"
               />
@@ -44,8 +45,13 @@ const Header = () => {
             <Link to="/contact">Contact Us</Link>
           </li>
           <li>
+            <Link to="/contact">{global}</Link>
+          </li>
+          <li>
             <Link to="/cart">
-              <span className="relative pl-5 text-center">{cartItems.length}</span>
+              <span className="relative pl-5 text-center">
+                {cartItems.length}
+              </span>
               <img
                 src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png"
                 className="w-10 h-8"
@@ -68,6 +74,5 @@ const Header = () => {
       </div>
     </div>
   );
-  
 };
 export default Header;
